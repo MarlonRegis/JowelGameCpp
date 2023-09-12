@@ -8,17 +8,17 @@ namespace Core
 {
     class ItemModel
     {
+        private:
+            std::string _typeOfItem = null;
+            int _relevanceValue = null;
+            
         public: 
-            ItemModel::ItemModel(std::string setTypeValue, std::string setRevelanceValue);
+            ItemModel::ItemModel(std::string setTypeValue, int setRevelanceValue);
             ~ItemModel() = default;
             std::string GetType();
             std::string GetRevelanceValue();
-            std::string SetType(std::string setTypeValue);
-            std::string SetRevelanceValue(std::string setRevelanceValue);
-            
-        private:
-            std::string _typeOfItem = null;
-            std::string _relevanceValue = null;
+            void SetType(std::string setTypeValue);
+            void SetRevelanceValue(int setRevelanceValue);
     };
 }
 #endif

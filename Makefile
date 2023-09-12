@@ -1,5 +1,6 @@
 # Name of the project
-PROJ_NAME=operacoes
+PROJ_NAME=JowelGame
+ 
  
 # .cpp files
 CPP_SOURCE= operacoes.cpp OperarCalculos.cpp Calculos.cpp

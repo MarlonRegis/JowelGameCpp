@@ -10,7 +10,7 @@ namespace Core
     class FoodModel : ItemModel
     {
         public: 
-            FoodModel(std::string setTypeValue, std::string setRevelanceValue);
+            FoodModel(std::string setTypeValue, int setRevelanceValue);
             ~FoodModel() = default;
     };
 }

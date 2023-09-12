@@ -3,12 +3,12 @@
 using namespace Core;
 using namespace std;
 
-ItemModel::ItemModel(std::string setTypeValue, std::string setRevelanceValue){
+ItemModel::ItemModel(std::string setTypeValue, int setRevelanceValue){
         _relevanceValue = setRevelanceValue;
         _typeOfItem = setTypeValue;
 }
 
-std::string SetRevelanceValue(std::string setRevelanceValue){
+std::string SetRevelanceValue(int setRevelanceValue){
         _relevanceValue = setRevelanceValue;
 }
 

@@ -11,16 +11,16 @@ using namespace Core;
 
 namespace Main
 {
-    class Treasure
+    class Treasure{
     {
         public: 
             Treasure();
             ~Treasure() = default;
             void Add(FoodModel foodModel);
             void Add(JewelModel jewelModel);
-            void RemoveFood();
-            void RemoveJewel();
-            std::string getValue();
+            void Remove(FoodModel foodModel);
+            void Remove(JewelModel jewelModel);
+            int getValue();
         private:
             std::vector<class JewelModel> _jewelList;
             std::vector<class Food> _foodList;

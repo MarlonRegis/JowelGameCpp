@@ -10,7 +10,7 @@ namespace Core
     class JewelModel : ItemModel
     {
         public: 
-            JewelModel(std::string setTypeValue, std::string setRevelanceValue);
+            JewelModel(std::string setTypeValue, int setRevelanceValue);
             ~JewelModel() = default;
     };
 }
