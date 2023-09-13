@@ -3,6 +3,7 @@
 
 #include "Core/ItemModel.h"
 
+
 using namespace Core;
 
 namespace Main
@@ -14,18 +15,19 @@ namespace Main
             int _height;
             std::vector<class ItemModel> _itemList;
             int _treasureQuantity;
-            int _foodQuantity;
-            int _jewelQuantity;
-            int _foodValue;
-            int _jewelValue;
+            int _treasureFoodQuantity;
+            int _treasureJewelQuantity;
+            int _treasureFoodValue;
+            int _treasureJewelValue;
+            void FindItemList();
         public:
             Map(int w, int h);
-            ~Map()=default;
+            ~Map();
             void AddItem(int x, int y, Item* item);
             void RemoveItem(int x, int y);
             void SetEmptyMap();
+            void DeleteMap();
             void PrintMap() const;
-            void SetItemList();
     };
 }
 #endif

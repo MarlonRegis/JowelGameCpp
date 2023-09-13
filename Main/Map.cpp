@@ -1,3 +1,4 @@
+#include "Treasure.h"
 
 using namespace Main;
 
@@ -9,6 +10,11 @@ Map::Map(int width, int height){
     for (int i = 0; i < _width; i++) {
         _map[i] = new ItemModel[_height];
     }
+}
+
+Map::~Map()
+{
+    Map::DeleteScreen(_map);
 }
 
 void Map::SetEmptyMap()
@@ -23,6 +29,13 @@ void Map::SetEmptyMap()
 }
 
 void Map::PrintMap(){
+    Map::FindItemList();   
+    cout <<"Treasure Quantity: " << _treasureQuantity << endl;
+    cout <<"Treasure Food Quantity: " << _treasureFoodQuantity << endl;
+    cout <<"Treasure Food total Value: " << _treasureFoodValue << endl;
+    cout <<"Treasure Jewel Quantity: " << _treasureJewelQuantity << endl;
+    cout <<"Treasure Jewel total Value: " << _treasureJewelValue << endl;
+
     for (int i = 0; i < _width; i++) 
     {
         for (int j = 0; j < _height; j++) 
@@ -46,21 +59,32 @@ void Map::RemoveItem(int x, int y){
     _map[width][height]= nullptr;
 }
 
-void Map::SetItemList(){
+void Map::FindItemList(){
     for (int i = 0; i < _width; i++) 
     {
         for (int j = 0; j < _height; j++) 
         {
-            if(_map[i][j].GetType() != nullptr){
-                _itemList.push_back(_map[i][j]);
-            }else{
-                for (item = _itemList.begin(); item != _itemList.end(); item++)
-	        {
-                    if(_itemList[item].GetType() == _map[i][j].GetType()){
-                        _itemList[item].SetValue(_itemList[item].GetValue() +  _map[i][j].GetValue());
-                    }
-	        }
+            if(_map[i][j].GetType() == "T"){
+                _treasureQuantity += 1;
+                auto test = (Treasure) _map[i][j];
+                for(ItemModel item : test.GetItemList()){
+                        if(item.GetType() == "F"){
+                            _treasureFoodQuantity +=1;
+                            _treasureFoodValue +=item.GetValue();    
+                        }else if(item.GetType() == "J"){
+                            _treasureJewelQuantity +=1;
+                            _treasureJewelValue  +=item.GetValue();
+                        }
+                }
             }
         }
     } 
+}
+
+void Map::DeleteMap(ItemModel** matriz)
+{
+    for (int i = 0; i < _width; i++) {
+        delete[] matriz[i]; 
+    }
+    delete[] matriz;
 }
