@@ -3,22 +3,22 @@
 using namespace Core;
 using namespace std;
 
-ItemModel::ItemModel(std::string setTypeValue, int setRevelanceValue){
+ItemModel::ItemModel(char setTypeValue, int setRevelanceValue){
         _relevanceValue = setRevelanceValue;
         _typeOfItem = setTypeValue;
 }
 
-std::string SetRevelanceValue(int setRevelanceValue){
+void SetValue(int setRevelanceValue){
         _relevanceValue = setRevelanceValue;
 }
 
-std::string SetType(std::string setTypeValue){
+void SetType(char setTypeValue){
         _typeOfItem = setTypeValue;
 }
 
-std::string GetRevelanceValue(){
+int GetValue(){
         return _relevanceValue;
 }
-std::string GetType(){
+char GetType(){
         return _typeOfItem;
 }

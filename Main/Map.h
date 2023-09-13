@@ -1,20 +1,31 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <vector>
-#include "ItemModel.h"
+#include "Core/ItemModel.h"
 
-class Map {
+using namespace Core;
+
+namespace Main
+{
+    class Map {
         private:
-        std::vector<Item*> items;
-        int width;
-        int height;
-
+            ItemModel **_map;
+            int _width;
+            int _height;
+            std::vector<class ItemModel> _itemList;
+            int _treasureQuantity;
+            int _foodQuantity;
+            int _jewelQuantity;
+            int _foodValue;
+            int _jewelValue;
         public:
-        Map(int w, int h);
-        void addItem(Item* item);
-        void removeItem(Item* item);
-        void printMap() const;
-};
-
+            Map(int w, int h);
+            ~Map()=default;
+            void AddItem(int x, int y, Item* item);
+            void RemoveItem(int x, int y);
+            void SetEmptyMap();
+            void PrintMap() const;
+            void SetItemList();
+    };
+}
 #endif

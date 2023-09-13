@@ -4,35 +4,28 @@
 using namespace Main;
 using namespace std;
 
-Treasure::Treasure(){
+Treasure::Treasure():  ItemModel("T", 0){
 }
 
-void Add(FoodModel foodModel){
-        _foodList.push_back(foodModel);
+void Treasure::Add(ItemModel itemModel){
+        _itemList.push_back(itemModel);
 }
 
-void Add(JewelModel jewelModel){
-        _jewelList.push_back(jewelModel);
+void Treasure::Remove(ItemModel itemModel){
+        //TODO: Analise this method
+        _itemList.remove(_itemList.begin(),_itemList.end(),itemModel);
 }
 
-void Remove(FoodModel foodModel){
-        _foodList.remove(_foodList.begin(),_foodList.end(),foodModel)
-}
+int Treasure::GetValue(){
+        int resultValue = 0;
+        vector<ItemModel>::iterator item; 
 
-void Remove(JewelModel jewelModel){
-        vector<int>::iterator new_end;
-        new_end =_jewelList.remove(_foodList.begin(),_foodList.end(),jewelModel)
-}
-
-int getValue(){
-        vector<FoodModel>::iterator itFood; 
-        for(itFood = _foodList.begin(); itFood != _foodList.end(); itFood++)    {
-                int resultValue = itFood._relevanceValue;
-        }
-
-        vector<JewelModel>::iterator itJewel; 
-        for(itJewel = _foodList.begin(); itJewel != _foodList.end(); itJewel++)    {
-                resultValue = itJewel._relevanceValue;
+        for(item = _itemList.begin(); item != _itemList.end(); item++){
+                resultValue = item.GetValue();
         }
         return resultValue;
+}
+
+std::vector<class ItemModel> Treause::GetItemList(){
+        return _itemList;
 }

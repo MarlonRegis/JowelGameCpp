@@ -3,7 +3,7 @@ PROJ_NAME=JowelGame
  
  
 # .cpp files
-CPP_SOURCE= operacoes.cpp OperarCalculos.cpp Calculos.cpp
+CPP_SOURCE= operacoes.cpp OperarCalculos.cpp Calculos.CPP_SOURCE
 
 # Object files
 OBJS= $(CPP_SOURCE:.cpp=.o)

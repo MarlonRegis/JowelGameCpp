@@ -3,6 +3,4 @@
 using namespace Core;
 using namespace std;
 
-JewelModel::JewelModel(std::string setTypeValue,int setRevelanceValue):ItemModel(setTypeValue,setRevelanceValue){
-
-}
+JewelModel::JewelModel(int setRevelanceValue):ItemModel("J",setRevelanceValue){};

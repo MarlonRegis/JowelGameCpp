@@ -1,16 +1,15 @@
 #ifndef FOOD_MODEL
 #define FOOD_MODEL
 
-#include <string>
 #include <stdio.h>
 #include "ItemModel.h"
 
 namespace Core
 {
-    class FoodModel : ItemModel
+    class FoodModel : public ItemModel
     {
         public: 
-            FoodModel(std::string setTypeValue, int setRevelanceValue);
+            FoodModel(char setTypeValue, int setRevelanceValue);
             ~FoodModel() = default;
     };
 }
