@@ -18,6 +18,9 @@ MAIN_OBJS = $(patsubst $(MAIN_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(MAIN_SRCS))
 # Nome do executável
 EXEC = JewelGame
 
+#Remove Command
+RM = -del
+
 all: $(BIN_DIR)/$(EXEC)
 
 # Compilação dos arquivos fonte em objetos para as classes Core
@@ -33,4 +36,4 @@ $(BIN_DIR)/$(EXEC): $(CORE_OBJS) $(MAIN_OBJS)
 	$(CC) $(CFLAGS)  $^ -o $@
 
 clean:
-	rm -f $(OBJ_DIR)/*.o $(BIN_DIR)/$(EXEC)
+	$(RM) $(OBJ_DIR)\*.o $(BIN_DIR)\$(EXEC).exe

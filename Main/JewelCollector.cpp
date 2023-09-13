@@ -1,3 +1,9 @@
+#include <iostream>
+#include <stdio.h>
+#include "Map.h"
+
+using namespace std;
+using namespace Main;
 
 void PrintScreen()
 {
@@ -15,6 +21,12 @@ int main()
 {
     bool exitProgram = false;
     int inputvalue;
+    int maxWidth = 10;
+    int maxHeight = 10; 
+
+    Map map;
+    map(maxWidth, maxHeight);
+    map.SetEmptyMap();
 
     do 
     { 
@@ -31,13 +43,13 @@ int main()
             switch (inputvalue)
             {
                 case 1:
-                    cout<<"Enter the row: "<< endl;
+                    cout<<"Enter the row position: "<< endl;
                     if (!(cin >> line))
                         throw std::invalid_argument("Unnexpected line, choice a correctly line!");
-                    cout<<"Enter the column: "<< endl;
+                    cout<<"Enter the column position: "<< endl;
                     if (!(cin >> column))
                         throw std::invalid_argument("Unnexpected column, choice a correctly column!");
-                    cout<<"Enter the value: "<< endl;
+                    cout<<"Enter with Item Model Type: "<< endl;
                     cin >> valueDraw;
                     screenFactory.DrawScreen(line-1, column-1, valueDraw);
                     break;
@@ -55,6 +67,9 @@ int main()
                     screenFactory.ReadScreen();
                     break;
                 case 4:
+                    exitProgram = true;
+                    break;
+                case 5:
                     exitProgram = true;
                     break;
                 default:

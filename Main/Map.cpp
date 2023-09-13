@@ -1,8 +1,13 @@
+#include <iostream>
+#include "Map.h"
 #include "Treasure.h"
 
+using namespace Core;
 using namespace Main;
+using namespace std;
 
-Map::Map(int width, int height){
+Map::Map(int width, int height)
+{
     _width = width;
     _height = height; 
     _map = new ItemModel *[_width];
@@ -14,7 +19,7 @@ Map::Map(int width, int height){
 
 Map::~Map()
 {
-    Map::DeleteScreen(_map);
+    Map::DeleteMap(_map);
 }
 
 void Map::SetEmptyMap()
@@ -23,14 +28,15 @@ void Map::SetEmptyMap()
     {
         for (int j = 0; j < _height; j++) 
         {
-            _map[i][j]=" ";
+            _map[i][j] = ItemModel();
         }
     }
 }
 
-void Map::PrintMap(){
-    Map::FindItemList();   
-    cout <<"Treasure Quantity: " << _treasureQuantity << endl;
+void Map::PrintMap()
+{
+    Map::FindItemList();
+    std::cout <<"Treasure Quantity: " << _treasureQuantity << endl;
     cout <<"Treasure Food Quantity: " << _treasureFoodQuantity << endl;
     cout <<"Treasure Food total Value: " << _treasureFoodValue << endl;
     cout <<"Treasure Jewel Quantity: " << _treasureJewelQuantity << endl;
@@ -40,7 +46,7 @@ void Map::PrintMap(){
     {
         for (int j = 0; j < _height; j++) 
         {
-            if(_map[i][j].GetType() != null){
+            if(_map[i][j].GetType() != '\0'){
                 cout << _map[i][j].GetType();
             }else{
                 cout << " ";
@@ -55,25 +61,33 @@ void Map::AddItem(int width, int height, ItemModel item)
     _map[width][height]=item;
 }
 
-void Map::RemoveItem(int x, int y){
-    _map[width][height]= nullptr;
+void Map::RemoveItem(int width, int height)
+{
+    _map[width][height]= ItemModel();
 }
 
-void Map::FindItemList(){
+void Map::FindItemList()
+{
     for (int i = 0; i < _width; i++) 
     {
         for (int j = 0; j < _height; j++) 
         {
-            if(_map[i][j].GetType() == "T"){
-                _treasureQuantity += 1;
-                auto test = (Treasure) _map[i][j];
-                for(ItemModel item : test.GetItemList()){
-                        if(item.GetType() == "F"){
+            if(_map[i][j].GetType() == 'T')
+            {
+                _treasureQuantity = _treasureQuantity + 1;
+                auto treasure = _map[i][j];
+                
+                for(ItemModel item : treasure.GetItemList())
+                {
+                        if(item.GetType() == 'F')
+                        {
                             _treasureFoodQuantity +=1;
-                            _treasureFoodValue +=item.GetValue();    
-                        }else if(item.GetType() == "J"){
+                            _treasureFoodValue += item.GetValue();    
+                        }
+                        else if(item.GetType() == 'J')
+                        {
                             _treasureJewelQuantity +=1;
-                            _treasureJewelValue  +=item.GetValue();
+                            _treasureJewelValue  += item.GetValue();
                         }
                 }
             }

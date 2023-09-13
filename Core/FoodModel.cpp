@@ -3,4 +3,4 @@
 using namespace Core;
 using namespace std;
 
-FoodModel::FoodModel(int setRevelanceValue): ItemModel("F",setRevelanceValue){};
+FoodModel::FoodModel(int setRevelanceValue): ItemModel('F',setRevelanceValue){};

@@ -8,17 +8,30 @@ ItemModel::ItemModel(char setTypeValue, int setRevelanceValue){
         _typeOfItem = setTypeValue;
 }
 
-void SetValue(int setRevelanceValue){
+void ItemModel::SetValue(int setRevelanceValue){
         _relevanceValue = setRevelanceValue;
 }
 
-void SetType(char setTypeValue){
+void ItemModel::SetType(char setTypeValue){
         _typeOfItem = setTypeValue;
 }
 
-int GetValue(){
+int ItemModel::GetValue(){
         return _relevanceValue;
 }
-char GetType(){
+char ItemModel::GetType(){
         return _typeOfItem;
+}
+
+std::vector<class ItemModel> ItemModel::GetItemList(){
+        return ItemModel::_itemList;
+}
+
+void ItemModel::Add(ItemModel itemModel){
+        _itemList.push_back(itemModel);
+}
+
+void ItemModel::Remove(ItemModel itemModel){
+        //TODO: Analise this method
+        //_itemList.remove(_itemList.begin(),_itemList.end(),itemModel);
 }

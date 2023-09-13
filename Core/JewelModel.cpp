@@ -3,4 +3,4 @@
 using namespace Core;
 using namespace std;
 
-JewelModel::JewelModel(int setRevelanceValue):ItemModel("J",setRevelanceValue){};
+JewelModel::JewelModel(int setRevelanceValue):ItemModel('J',setRevelanceValue){};

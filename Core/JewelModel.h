@@ -9,7 +9,7 @@ namespace Core
     class JewelModel : public ItemModel
     {
         public: 
-            JewelModel(char setTypeValue, int setRevelanceValue);
+            JewelModel(int setRevelanceValue);
             ~JewelModel() = default;
     };
 }

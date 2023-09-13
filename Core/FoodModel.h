@@ -9,7 +9,7 @@ namespace Core
     class FoodModel : public ItemModel
     {
         public: 
-            FoodModel(char setTypeValue, int setRevelanceValue);
+            FoodModel(int setRevelanceValue);
             ~FoodModel() = default;
     };
 }

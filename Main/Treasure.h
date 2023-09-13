@@ -1,25 +1,16 @@
-#ifndef ITEM_MODEL
-#define ITEM_MODEL
+#ifndef TREASURE_H
+#define TREASURE_H
 
-#include <stdio.h>
-#include <vector>
-#include "Core/ItemModel.h"
-
-using namespace Core;
+#include "../Core/ItemModel.h"
 
 namespace Main
 {
-    class Treasure: public ItemModel{
+    class Treasure: public Core::ItemModel
     {
-        private:
-            std::vector<class ItemModel> _itemList;
         public: 
-            Treasure();
+            Treasure(int setRevelanceValue);
             ~Treasure() = default;
-            void Add(ItemModel itemModel);
-            void Remove(ItemModel foodModel);
             int GetValue();
-            std::vector<class ItemModel> GetItemList();
     };
 }
 #endif
