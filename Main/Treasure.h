@@ -7,7 +7,8 @@ namespace Main
 {
     class Treasure: public Core::ItemModel
     {
-        public: 
+        public:
+            Treasure() = default;
             Treasure(int setRevelanceValue);
             ~Treasure() = default;
             int GetValue();

@@ -27,7 +27,7 @@ namespace Main
         public:
             Map(int w, int h);
             ~Map();
-            void AddItem(int width, int height, Core::ItemModel item);
+            void AddItem(int width, int height, Core::ItemModel& item);
             void RemoveItem(int width, int height);
             void SetEmptyMap();
             void PrintMap();

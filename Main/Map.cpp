@@ -56,14 +56,14 @@ void Map::PrintMap()
     }
 }
 
-void Map::AddItem(int width, int height, ItemModel item)
+void Map::AddItem(int width, int height, ItemModel& item)
 {
-    _map[width][height]=item;
+    _map[width][height] = item;
 }
 
 void Map::RemoveItem(int width, int height)
 {
-    _map[width][height]= ItemModel();
+    _map[width][height] = ItemModel();
 }
 
 void Map::FindItemList()
