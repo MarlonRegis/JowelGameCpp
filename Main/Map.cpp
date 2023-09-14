@@ -42,6 +42,12 @@ void Map::PrintMap()
     cout <<"Treasure Jewel Quantity: " << _treasureJewelQuantity << endl;
     cout <<"Treasure Jewel total Value: " << _treasureJewelValue << endl;
 
+    _treasureQuantity       = 0;
+    _treasureFoodQuantity   = 0;
+    _treasureFoodValue      = 0;
+    _treasureJewelQuantity  = 0;
+    _treasureJewelValue     = 0;
+
     for (int i = 0; i < _width; i++) 
     {
         for (int j = 0; j < _height; j++) 

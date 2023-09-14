@@ -16,11 +16,11 @@ namespace Main
             int _width;
             int _height;
 
-            int _treasureQuantity;
-            int _treasureFoodQuantity;
-            int _treasureJewelQuantity;
-            int _treasureFoodValue;
-            int _treasureJewelValue;
+            int _treasureQuantity = 0;
+            int _treasureFoodQuantity = 0;
+            int _treasureJewelQuantity = 0;
+            int _treasureFoodValue = 0;
+            int _treasureJewelValue = 0;
 
             void FindItemList();
             void DeleteMap(Core::ItemModel** matriz);

@@ -31,7 +31,7 @@ void ItemModel::Add(ItemModel itemModel){
         _itemList.push_back(itemModel);
 }
 
-void ItemModel::Remove(ItemModel itemModel){
-        //TODO: Analise this method
-        //_itemList.remove(_itemList.begin(),_itemList.end(),itemModel);
+void ItemModel::Remove(int index)
+{
+        _itemList.erase(_itemList.begin() + index);
 }

@@ -25,7 +25,7 @@ namespace Core
 
             std::vector<class ItemModel> GetItemList();
             void Add(ItemModel itemModel);
-            void Remove(ItemModel foodModel);
+            void Remove(int index);
     };
 }
 #endif

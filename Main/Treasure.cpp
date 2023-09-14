@@ -10,13 +10,13 @@ Treasure::Treasure(int setRevelanceValue):ItemModel('T', setRevelanceValue){};
 int Treasure::GetValue()
 {
         int resultValue = 0;
-        // vector<ItemModel>::iterator item; 
+        
+        vector<ItemModel>::iterator item; 
 
-        // for(item = _itemList.begin(); item != _itemList.end(); item++)
-        // {
-        //         auto itemModel = (ItemModel) item;
-        //         resultValue = itemModel.GetValue();
-        // }
+        for(item = ItemModel::GetItemList().begin(); item != ItemModel::GetItemList().end(); item++)
+        {
+                resultValue += item->GetValue();
+        }
 
         return resultValue;
 }

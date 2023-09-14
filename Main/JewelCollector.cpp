@@ -1,9 +1,9 @@
 #include <iostream>
 #include <stdio.h>
-#include "Map.h"
 #include "../Core/FoodModel.h"
 #include "../Core/JewelModel.h"
 #include "Treasure.h"
+#include "Map.h"
 
 using namespace std;
 using namespace Main;
@@ -17,18 +17,19 @@ static void PrintScreen()
     std::cout << "1- Add Item in Map" << std::endl;
     std::cout << "2- Add Treasure in Map" << std::endl;
     std::cout << "3- Remove Item in Map" << std::endl;
-    std::cout << "4- Exit" << std::endl;
+    std::cout << "4- Print Map" << std::endl;
+    std::cout << "5- Exit" << std::endl;
 }
 
 static ItemModel& CreateItemModelByType(char itemModeltype, int valueReference, ItemModel& itemModel)
 {
     if (itemModeltype == 'J')
     {
-        itemModel = FoodModel(valueReference);
+        itemModel = JewelModel(valueReference);
     } 
     else if (itemModeltype == 'F')
     {
-        itemModel = JewelModel(valueReference);
+        itemModel = FoodModel(valueReference);
     }
 
     return itemModel;
@@ -139,6 +140,11 @@ int main()
                     break;
                 }
                 case 4:
+                {
+                    map.PrintMap();
+                    break;
+                }
+                case 5:
                 {
                     exitProgram = true;
                     break;

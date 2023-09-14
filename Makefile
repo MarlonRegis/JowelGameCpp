@@ -2,7 +2,7 @@
 TARGET = JewelCollector
 
 CC = g++
-CFLAGS = -c -Wall -ansi -pedantic -std=c++17
+CFLAGS = -Wall -std=c++17
 
 # Diretórios de origem e destino
 CORE_DIR = Core
@@ -35,7 +35,7 @@ $(OBJ_DIR)/%.o: $(MAIN_DIR)/%.cpp
 
 # Linkagem dos objetos para gerar o executável
 $(BIN_DIR)/$(TARGET): $(CORE_OBJS) $(MAIN_OBJS)
-	$(CC) $(CFLAGS) -o $@ $(MAIN_DIR)/JewelCollector.cpp $(CORE) $(MAIN) $^
+	$(CC) $(CFLAGS) -o $@ $(CORE) $(MAIN) $^
 
 clean:
 	$(RM) $(OBJ_DIR)\*.o $(BIN_DIR)\$(TARGET).exe
