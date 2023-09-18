@@ -15,6 +15,7 @@ namespace Main
             int _height;
 
             bool _walkInMapSucess;
+            bool _winGame;
 
             int _treasureQuantity = 0;
             int _treasureFoodQuantity = 0;
@@ -49,6 +50,7 @@ namespace Main
             bool GameOver();
 
             void GetRobotPosition(int &width, int &height);
+            bool GetWinGame();
 
             bool GetWalkInMapSucess();
             std::string WalkInMap(char command, int width, int height, Core::ItemModel& itemModel);

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "ItemModel.h"
 
 using namespace Core;
@@ -41,7 +43,43 @@ void ItemModel::Add(ItemModel itemModel){
         _itemList.push_back(itemModel);
 }
 
-void ItemModel::Remove(int index)
+void ItemModel::RemoveAll()
 {
-        _itemList.erase(_itemList.begin() + index);
+        _itemList.clear();
+}
+
+void ItemModel::AddItem(ItemModel itemModel)
+{
+    if(itemModel.GetType() == 'F')
+    {
+        SetEnergy(GetEnergy() + itemModel.GetValue());
+    }
+    else if(itemModel.GetType() == 'J')
+    {
+        ItemModel::SetValue(ItemModel::GetValue() + itemModel.GetValue());
+        _inventory.push_back(itemModel);
+    } 
+    else if(itemModel.GetType() == 'T')
+    {
+        CollectTreasure(itemModel);
+    }
+}
+
+void ItemModel::CollectTreasure(ItemModel itemModel)
+{
+    vector<ItemModel>::iterator item; 
+
+    for(item = ItemModel::GetItemList().begin(); item != ItemModel::GetItemList().end(); item++)
+    {
+        if(item->GetType() == 'F')
+        {
+            SetEnergy(GetEnergy() + item->GetValue());
+        }
+        else if(item->GetType() == 'J')
+        {
+            ItemModel::SetValue(ItemModel::GetValue() + item->GetValue());
+            ItemModel newItem = ItemModel(item->GetType(), item->GetValue());
+            _inventory.push_back(newItem);
+        } 
+    }
 }

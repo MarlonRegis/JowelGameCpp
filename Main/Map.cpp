@@ -13,6 +13,7 @@ using namespace std;
 
 Map::Map(int width, int height)
 {
+    _winGame = false;
     _width = width;
     _height = height; 
     _map = new ItemModel *[_width];
@@ -165,7 +166,7 @@ bool Map::GetWalkInMapSucess()
 
 bool Map::ValidateBoundariesOutsideMap(int width, int height)
 {
-    if ((((width < 0) && (width >= _width)) || ((height < 0) && (height >= _height))))
+    if ((((width < 0) || (width >= _width)) || ((height < 0) || (height >= _height))))
     {
         return true;
     }
@@ -338,26 +339,29 @@ void Map::CollectAll(int width, int height, ItemModel& itemModel)
 
 void Map::SetStatusMapCollect(int newWidth, int newHeight, Core::ItemModel& itemModel)
 {
-    if (!ValidateBoundariesOutsideMap(newWidth, newHeight) 
-        && ValidateIfHasAnItem(newWidth, newHeight)
-        && !ValidateRobot(itemModel))
+    if (!ValidateBoundariesOutsideMap(newWidth, newHeight))
     {
-        if(_map[newWidth][newHeight].GetType() == 'F')
+        if(ValidateIfHasAnItem(newWidth, newHeight) && !ValidateRobot(itemModel))
         {
-            itemModel.Add(_map[newWidth][newHeight]);
-            RemoveItem(newWidth, newHeight);
-        }
-        else if(_map[newWidth][newHeight].GetType() == 'J')
-        {
-            itemModel.Add(_map[newWidth][newHeight]);
-            RemoveItem(newWidth, newHeight);
-        } 
-        else if(_map[newWidth][newHeight].GetType() == 'T')
-        {
-            unsigned int vecSize = _map[newWidth][newHeight].GetItemList().size();
-            for(unsigned int i = 0; i < vecSize; i++)
+            if(_map[newWidth][newHeight].GetType() == 'F')
             {
-                _map[newWidth][newHeight].Remove(i);
+                itemModel.AddItem(_map[newWidth][newHeight]);
+                RemoveItem(newWidth, newHeight);
+            }
+            else if(_map[newWidth][newHeight].GetType() == 'J')
+            {
+                itemModel.AddItem(_map[newWidth][newHeight]);
+                RemoveItem(newWidth, newHeight);
+            } 
+            else if(_map[newWidth][newHeight].GetType() == 'T')
+            {
+                unsigned int vecSize = _map[newWidth][newHeight].GetItemList().size();
+                for(unsigned int i = 0; i < vecSize; i++)
+                {
+                    itemModel.AddItem(_map[newWidth][newHeight].GetItemList()[i]);
+                }
+
+                _map[newWidth][newHeight].RemoveAll();
             }
         }
     }
@@ -397,6 +401,7 @@ bool Map::GameOver()
 
     if(jewel == 0)
     {
+        _winGame = true;
         return true;
     }
     else
@@ -427,3 +432,8 @@ void Map::GetRobotPosition(int &width, int &height)
         }
     }
 }
+
+ bool Map::GetWinGame()
+ {
+    return _winGame;
+ }

@@ -12,7 +12,11 @@ namespace Core
             char _typeOfItem = '\0';
             int _relevanceValue = 0;
             int _energy = 0;
+            std::vector<class Core::ItemModel> _inventory;
+
             std::vector<class ItemModel> _itemList;
+
+            void CollectTreasure(Core::ItemModel itemModel);
             
         public: 
             ItemModel() = default;
@@ -26,10 +30,12 @@ namespace Core
 
             std::vector<class ItemModel> GetItemList();
             void Add(ItemModel itemModel);
-            void Remove(int index);
+            void RemoveAll();
 
             int GetEnergy();
             void SetEnergy(int setEnergy);
+
+            void AddItem(Core::ItemModel itemModel);
     };
 }
 #endif

@@ -46,7 +46,7 @@ int main()
     
     ItemModel foodModel = FoodModel(15);
     map.AddItem(0, 10, foodModel);
-    ItemModel foodModel2 = FoodModel(10);
+    ItemModel foodModel2 = FoodModel(20);
     map.AddItem(12, 8, foodModel2);
     ItemModel jewelModel = JewelModel(50);
     map.AddItem(20, 25, jewelModel);
@@ -100,15 +100,25 @@ int main()
 
                             gameOver = map.GameOver();
 
-                            if(!gameOver)
-                            {
-                                std::cout << "Energy: " << robot.GetEnergy() << " Inventory: " << robot.GetValue() << std::endl;
-                                map.PrintMap();
-                            } 
-                            else
+                            if(map.GetWinGame())
                             {
                                 exitProgram = true;
-                                std::cout << "GAME OVER!" << std::endl;
+                                std::cout << "Energy: " << robot.GetEnergy() << " Inventory: " << robot.GetValue() << std::endl;
+                                map.PrintMap();
+                                std::cout << "Congratulations you win JewelCollector!" << std::endl;
+                            } 
+                            else 
+                            {
+                                if(!gameOver)
+                                {
+                                    std::cout << "Energy: " << robot.GetEnergy() << " Inventory: " << robot.GetValue() << std::endl;
+                                    map.PrintMap();
+                                } 
+                                else
+                                {
+                                    exitProgram = true;
+                                    std::cout << "GAME OVER!" << std::endl;
+                                }
                             }
                         }
                     } while (!gameOver);
