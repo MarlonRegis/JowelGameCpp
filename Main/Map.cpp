@@ -175,7 +175,7 @@ bool Map::ValidateBoundariesOutsideMap(int width, int height)
 
 bool Map::ValidateIfHasAnItem(int width, int height)
 {
-    if(_map[width][height].GetType() != '\0')
+    if((_map[width][height].GetType() != '\0') && (_map[width][height].GetType() != 'R'))
     {
         return true;
     }

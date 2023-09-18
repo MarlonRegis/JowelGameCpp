@@ -11,6 +11,7 @@ namespace Core
         private:
             char _typeOfItem = '\0';
             int _relevanceValue = 0;
+            int _energy = 0;
             std::vector<class ItemModel> _itemList;
             
         public: 
@@ -27,8 +28,8 @@ namespace Core
             void Add(ItemModel itemModel);
             void Remove(int index);
 
-            int GetEnergy() { return 0; };
-            void SetEnergy(int setEnergy) {};
+            int GetEnergy();
+            void SetEnergy(int setEnergy);
     };
 }
 #endif

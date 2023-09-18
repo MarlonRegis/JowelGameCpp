@@ -16,11 +16,21 @@ void ItemModel::SetType(char setTypeValue){
         _typeOfItem = setTypeValue;
 }
 
+void ItemModel::SetEnergy(int setEnergy) 
+{
+        _energy = setEnergy;
+}
+
 int ItemModel::GetValue(){
         return _relevanceValue;
 }
+
 char ItemModel::GetType(){
         return _typeOfItem;
+}
+
+int ItemModel::GetEnergy(){
+        return _energy;
 }
 
 std::vector<class ItemModel> ItemModel::GetItemList(){

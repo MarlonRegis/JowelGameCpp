@@ -41,6 +41,7 @@ int main()
     map.SetEmptyMap();
 
     ItemModel robot = Robot(0);
+    robot.SetEnergy(10);
     map.AddItem(0, 0, robot);
     
     ItemModel foodModel = FoodModel(15);
@@ -101,7 +102,7 @@ int main()
 
                             if(!gameOver)
                             {
-                                std::cout << "Energy: " << robot.GetEnergy() << "Inventory: " << robot.GetValue() << std::endl;
+                                std::cout << "Energy: " << robot.GetEnergy() << " Inventory: " << robot.GetValue() << std::endl;
                                 map.PrintMap();
                             } 
                             else

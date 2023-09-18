@@ -8,16 +8,6 @@ using namespace std;
 
 Robot::Robot(int setRevelanceValue):ItemModel('R', setRevelanceValue){};
 
-int Robot::GetEnergy()
-{
-    return _energy;
-}
-
-void Robot::SetEnergy(int setEnergy)
-{
-    _energy = setEnergy;
-}
-
 void Robot::Add(ItemModel itemModel)
 {
     if(itemModel.GetType() == 'F')
