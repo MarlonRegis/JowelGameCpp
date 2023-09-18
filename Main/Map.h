@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <stdio.h>
+#include <string>
 #include <vector>
 #include "../Core/ItemModel.h"
 
@@ -11,10 +11,10 @@ namespace Main
     {
         private:
             Core::ItemModel **_map;
-            std::vector<class Core::ItemModel> _itemList;
-
             int _width;
             int _height;
+
+            bool _walkInMapSucess;
 
             int _treasureQuantity = 0;
             int _treasureFoodQuantity = 0;
@@ -24,6 +24,21 @@ namespace Main
 
             void FindItemList();
             void DeleteMap(Core::ItemModel** matriz);
+            bool ValidateBoundariesOutsideMap(int width, int height);
+            bool ValidateIfHasAnItem(int width, int height);
+            bool ValidateRobot(Core::ItemModel& itemModel);
+            std::string ValidateAll(int width, int height, Core::ItemModel& itemModel);
+            std::string ValidateResponse(int width, int height, Core::ItemModel& itemModel);
+
+            std::string Up(int width, int height, Core::ItemModel& itemModel);
+            std::string Left(int width, int height, Core::ItemModel& itemModel);
+            std::string Right(int width, int height, Core::ItemModel& itemModel);
+            std::string Down(int width, int height, Core::ItemModel& itemModel);
+
+            void CollectAll(int width, int height, Core::ItemModel& itemModel);
+
+            void SetStatusMap(int width, int height, int newWidth, int newHeight, Core::ItemModel& itemModel);
+            void SetStatusMapCollect(int newWidth, int newHeight, Core::ItemModel& itemModel);
         public:
             Map(int w, int h);
             ~Map();
@@ -31,6 +46,12 @@ namespace Main
             void RemoveItem(int width, int height);
             void SetEmptyMap();
             void PrintMap();
+            bool GameOver();
+
+            void GetRobotPosition(int &width, int &height);
+
+            bool GetWalkInMapSucess();
+            std::string WalkInMap(char command, int width, int height, Core::ItemModel& itemModel);
     };
 }
 #endif

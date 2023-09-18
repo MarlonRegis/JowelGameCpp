@@ -26,6 +26,9 @@ namespace Core
             std::vector<class ItemModel> GetItemList();
             void Add(ItemModel itemModel);
             void Remove(int index);
+
+            int GetEnergy() { return 0; };
+            void SetEnergy(int setEnergy) {};
     };
 }
 #endif

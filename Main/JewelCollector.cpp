@@ -1,7 +1,13 @@
 #include <iostream>
 #include <stdio.h>
+#include <cstdlib>
+#include <ctime>
+#include <cctype>
+#include <algorithm>
+#include <cstring>
 #include "../Core/FoodModel.h"
 #include "../Core/JewelModel.h"
+#include "Robot.h"
 #include "Treasure.h"
 #include "Map.h"
 
@@ -14,58 +20,44 @@ static void PrintScreen()
     std::cout << "---Jewel Collector v1.0---" << std::endl;
     std::cout << "---Map 10 x 10---" << std::endl;
     std::cout << "Choose an option: " << std::endl;
-    std::cout << "1- Add Item in Map" << std::endl;
-    std::cout << "2- Add Treasure in Map" << std::endl;
-    std::cout << "3- Remove Item in Map" << std::endl;
-    std::cout << "4- Print Map" << std::endl;
-    std::cout << "5- Exit" << std::endl;
-}
-
-static ItemModel& CreateItemModelByType(char itemModeltype, int valueReference, ItemModel& itemModel)
-{
-    if (itemModeltype == 'J')
-    {
-        itemModel = JewelModel(valueReference);
-    } 
-    else if (itemModeltype == 'F')
-    {
-        itemModel = FoodModel(valueReference);
-    }
-
-    return itemModel;
-}
-
-static void AddItemModel(Map &map, ItemModel &itemModel)
-{
-    int line;
-    int column;
-    int valueReference;
-    char itemModeltype;
-
-    cout<<"Enter the row position: "<< endl;
-    if (((!(cin >> line)) && (line < 0 && line >= 10)))
-        throw std::invalid_argument("Unnexpected line, choice a correctly line!");
-    cout<<"Enter the column position: "<< endl;
-    if (((!(cin >> column) && (column < 0 && column >= 10))))
-        throw std::invalid_argument("Unnexpected column, choice a correctly column!");
-    cout<<"Enter with Item Model Type (J or F): "<< endl;
-    cin >> itemModeltype;
-    cout<<"Enter with Value Reference: "<< endl;
-    if (!(cin >> valueReference))
-        throw std::invalid_argument("Unnexpected value reference, choice a correctly value reference!");
-    
-    map.AddItem(line, column, CreateItemModelByType(itemModeltype, valueReference, itemModel));
+    std::cout << "1- Start Game" << std::endl;
+    std::cout << "2- Exit" << std::endl;
 }
 
 int main()
 {
     bool exitProgram = false;
     int inputvalue;
-    int maxWidth = 10;
-    int maxHeight = 10; 
+    char command;
+    bool gameOver;
+    int robotWidth = 0;
+    int robotHeight = 0; 
+    int maxWidth = 30;
+    int maxHeight = 30; 
+
+    string validateCommand = "";
 
     Map map(maxWidth, maxHeight);
     map.SetEmptyMap();
+
+    ItemModel robot = Robot(0);
+    map.AddItem(0, 0, robot);
+    
+    ItemModel foodModel = FoodModel(15);
+    map.AddItem(0, 10, foodModel);
+    ItemModel foodModel2 = FoodModel(10);
+    map.AddItem(12, 8, foodModel2);
+    ItemModel jewelModel = JewelModel(50);
+    map.AddItem(20, 25, jewelModel);
+    ItemModel jewelModel2 = JewelModel(50);
+    map.AddItem(29, 29, jewelModel2);
+
+    ItemModel treasure = Treasure(0);
+    ItemModel foodModel3 = FoodModel(25);
+    ItemModel jewelModel3 = JewelModel(100);
+    treasure.Add(foodModel3);
+    treasure.Add(jewelModel3);
+    map.AddItem(10, 5, treasure);
 
     do 
     { 
@@ -74,77 +66,54 @@ int main()
             PrintScreen();
             if (!(cin >> inputvalue))
                 throw std::invalid_argument("Unnexpected value, choice a correctly number!");
-
-            int line;
-            int column;
-            int valueReference;
-            char itemModeltype;
-            Treasure treasure;
-        
+            
             switch (inputvalue)
             {
                 case 1:
                 {
-                    ItemModel itemModel;
-                    AddItemModel(map, itemModel);
-                    break;
-                }
-                case 2:
-                {
-                    cout<<"Enter the row position: "<< endl;
-                    if (((!(cin >> line)) && (line < 0 && line >= 10)))
-                        throw std::invalid_argument("Unnexpected line, choice a correctly line!");
-                    cout<<"Enter the column position: "<< endl;
-                    if (((!(cin >> column) && (column < 0 && column >= 10))))
-                        throw std::invalid_argument("Unnexpected column, choice a correctly column!");
-                    
-                    treasure = Treasure(0);
-                    bool exitTreasure = false;
-                    int exitTreasureValue;
+                    std::cout << "Energy: " << robot.GetEnergy() << " Inventory: " << robot.GetValue() << std::endl;
+                    map.PrintMap();
 
                     do
                     {
-                        cout<<"Enter with Item Model Type (J or F) to add in Treasure: "<< endl;
-                        cin >> itemModeltype;
-                        cout<<"Enter with Value Reference: "<< endl;
-                        if (!(cin >> valueReference))
-                            throw std::invalid_argument("Unnexpected value reference, choice a correctly value reference!");
-
-                        ItemModel itemModel;
-                        treasure.Add(CreateItemModelByType(itemModeltype, valueReference, itemModel));
+                        std::cout << "Waiting for Command! Press P for Game Over!" << std::endl;
+                        cin >> command;
                         
-                        cout<<"Would you like to continue adding more ItemModel? (No: 1 )"<< endl;
-                        if (!(cin >> exitTreasureValue))
-                            throw std::invalid_argument("Unnexpected exit Treasure value, choice a correctly exit Treasure value!");
-
-                        if (exitTreasureValue == 1)
+                        if (tolower(command) == 'p')
                         {
-                            exitTreasure = true;
+                            gameOver = true;
+                            exitProgram = true;
+                            std::cout << "GAME OVER!" << std::endl;
                         }
+                        else 
+                        {
+                            map.GetRobotPosition(robotWidth, robotHeight);
+                            validateCommand = map.WalkInMap(tolower(command), robotWidth, robotHeight, robot);
+                            string empty = "";
 
-                    } while(!exitTreasure);
+                            transform(validateCommand.begin(), validateCommand.end(), validateCommand.begin(), ::toupper);
+                            if (!(strcasecmp(validateCommand.c_str(), empty.c_str()) == 0))
+                            {
+                                 std::cout << validateCommand << std::endl;
+                            }
 
-                    map.AddItem(line, column, treasure);
+                            gameOver = map.GameOver();
+
+                            if(!gameOver)
+                            {
+                                std::cout << "Energy: " << robot.GetEnergy() << "Inventory: " << robot.GetValue() << std::endl;
+                                map.PrintMap();
+                            } 
+                            else
+                            {
+                                exitProgram = true;
+                                std::cout << "GAME OVER!" << std::endl;
+                            }
+                        }
+                    } while (!gameOver);
                     break;
                 }
-                case 3:
-                {
-                    cout<<"Enter the row position: "<< endl;
-                    if (((!(cin >> line)) && (line < 0 && line >= 10)))
-                        throw std::invalid_argument("Unnexpected line, choice a correctly line!");
-                    cout<<"Enter the column position: "<< endl;
-                    if (((!(cin >> column) && (column < 0 && column >= 10))))
-                        throw std::invalid_argument("Unnexpected column, choice a correctly column!");
-                    
-                    map.RemoveItem(line, column);
-                    break;
-                }
-                case 4:
-                {
-                    map.PrintMap();
-                    break;
-                }
-                case 5:
+                case 2:
                 {
                     exitProgram = true;
                     break;
